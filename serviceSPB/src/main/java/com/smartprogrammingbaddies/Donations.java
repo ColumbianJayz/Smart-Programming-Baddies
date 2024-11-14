@@ -1,13 +1,38 @@
 package com.smartprogrammingbaddies;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.smartprogrammingbaddies.Event.Event;
+import com.smartprogrammingbaddies.StorageCenter.StorageCenter;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 
 /**
  * The Donation class representes a donation, including their name, type, donator of this item,
  * the date of this donation, lifespan, and its location.
  */
-
+@Entity
 public class Donations implements Serializable {
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)\
+  @Column(name= "donation_id")
+  private String donationName;
+  private String donationType;
+  private String donator;
+  private String lifeSpan;
+  private String location;
+  @ManyToMany
+  private Set<Event> event;
+  //Do we track the event where the donation came from. ID?
+  @ManyToOne
+  private StorageCenter storage;
 
   /**
    * Constructs a new Donations item with the specific name, type, donator, lifespan and location.
@@ -91,11 +116,4 @@ public class Donations implements Serializable {
            + "Lifespan: " + lifeSpan + "\n"
            + "Location: \n" + location;
   }
-
-  private String donationName;
-  private String donationType;
-  private String donator;
-  private String lifeSpan;
-  private String location;
-  
 }
