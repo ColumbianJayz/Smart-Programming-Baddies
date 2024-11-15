@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKey;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToMany;
 
 /**
@@ -29,9 +31,9 @@ public class Donations implements Serializable {
   private String lifeSpan;
   private String location;
   @ManyToMany
+  @MapKey(name = "event_id")
   private Set<Event> event;
-  //Do we track the event where the donation came from. ID?
-  @ManyToOne
+  @OneToMany
   private StorageCenter storage;
 
   /**
